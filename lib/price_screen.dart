@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   // const PriceScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency='INR';
+
 
 
   DropdownButton<String> androidDropDown(){
@@ -50,6 +52,15 @@ selectedCurrency=value.toString();
   }
 
 
+  Widget getPicker(){
+    if(Platform.isIOS){
+      return androidDropDown();
+    }
+    else if(Platform.isAndroid){
+      return iosPicker();
+    }
+    return androidDropDown();
+  }
 
 
 
@@ -90,7 +101,7 @@ selectedCurrency=value.toString();
             alignment: Alignment.center,
              padding: EdgeInsets.only(bottom: 30.0) ,
             color: Colors.lightBlue,
-            child:iosPicker(),),
+            child:getPicker(),),
         ],
       ),
     );
