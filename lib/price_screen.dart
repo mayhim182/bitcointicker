@@ -1,7 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io' show Platform;
+import 'package:http/http.dart' as http;
+
+
+
+const apiKey='72EC2785-B0B3-43E1-8EA1-D6C4E7C17DDF';
+
 
 class PriceScreen extends StatefulWidget {
   // const PriceScreen({Key? key}) : super(key: key);
@@ -11,6 +19,56 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+
+  String currentPrice='';
+
+  @override
+  void initState(){
+    super.initState();
+    getCurrencyData();
+  }
+
+
+  Future<dynamic> getCurrencyData() async{
+    const coinApiUrl='https://rest.coinapi.io/v1/exchangerate/BTC/USD?apiKey=$apiKey';
+      var url=Uri.parse(coinApiUrl);
+      http.Response response=await http.get(url);
+      if(response.statusCode==200) {
+        var decodedData = jsonDecode(response.body);
+        double lastPrice = decodedData['rate'];
+        setState(() {
+          currentPrice=lastPrice.toString();
+        });
+        return lastPrice;
+      }
+      else{
+        print(response.statusCode);
+        return 0;
+      }
+  }
+
+  Future<dynamic> getCurrencyDataForCurrency(String selectedCurrency) async{
+    String coinApiUrl='https://rest.coinapi.io/v1/exchangerate/BTC/$selectedCurrency?apiKey=$apiKey';
+    var url=Uri.parse(coinApiUrl);
+    http.Response response=await http.get(url);
+    if(response.statusCode==200) {
+      var decodedData = jsonDecode(response.body);
+      double lastPrice = decodedData['rate'];
+      setState(() {
+        currentPrice=lastPrice.toString();
+      });
+      return lastPrice;
+    }
+    else{
+      print(response.statusCode);
+      return 0;
+    }
+  }
+
+
+
+
+
   String selectedCurrency='INR';
 
 
@@ -86,7 +144,7 @@ selectedCurrency=value.toString();
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 28.0),
                   child: Text(
-                      '1 BTC = ? USD',
+                      '1 BTC=$currentPrice USD',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20.0,
