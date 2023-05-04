@@ -139,17 +139,47 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC=$currentPrice $selectedCurrency',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
+                child: Column(
+                  children:[
+                   Text(
+                    '1 BTC=$currentPrice $selectedCurrency',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
                   ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 10.0,
+                    ),
+                    Text(
+                      '1 ETH=$currentPrice $selectedCurrency',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 10.0,
+                    ),
+
+                    Text(
+                      '1 LTC=$currentPrice $selectedCurrency',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                ],
+                )
                 ),
               ),
             ),
-          ),
           Container(
             height: 150.0,
             alignment: Alignment.center,
