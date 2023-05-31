@@ -1,16 +1,14 @@
 # bitcointicker
 
-A new Flutter project.
+To use the app clone this repository by going to cmd prompt in the directory of your choice
+and write
+```bash
+  git clone <url>
+```
+open the project in android studio open terminal and run 
 
-## Getting Started
+```bash
+  flutter pub get
+```
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
